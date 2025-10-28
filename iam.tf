@@ -1,6 +1,6 @@
 # IAM Policy for Terraform State Access
 resource "aws_iam_policy" "terraform_state_access" {
-  name        = "TerraformStateAccess"
+  name        = "TerraformStateAccessToDynamodb"
   description = "Policy for accessing Terraform state in S3 and DynamoDB"
 
   policy = jsonencode({
