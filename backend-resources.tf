@@ -1,20 +1,26 @@
 # DynamoDB Table for Terraform State Locking
-resource "aws_dynamodb_table" "terraform_state_locks" {
-  name         = "terraform-state-locks"
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "LockID"
-
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
-
-  tags = {
-    Name        = "Terraform State Lock Table"
-    Purpose     = "Terraform state locking"
-    ManagedBy   = "Terraform"
-  }
-}
+# NOTE: This table must be created manually BEFORE running Terraform
+# because Terraform needs it to initialize the backend.
+# See BOOTSTRAP-SETUP.md for instructions.
+#
+# Commented out to avoid conflicts since the table is created manually:
+#
+# resource "aws_dynamodb_table" "terraform_state_locks" {
+#   name         = "terraform-state-locks"
+#   billing_mode = "PAY_PER_REQUEST"
+#   hash_key     = "LockID"
+#
+#   attribute {
+#     name = "LockID"
+#     type = "S"
+#   }
+#
+#   tags = {
+#     Name        = "Terraform State Lock Table"
+#     Purpose     = "Terraform state locking"
+#     ManagedBy   = "Manual (Bootstrap)"
+#   }
+# }
 
 # S3 Bucket for Terraform State (if not already created)
 # Note: This bucket should already exist (tf-statefile-83652954)
